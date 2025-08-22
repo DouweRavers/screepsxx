@@ -2,6 +2,7 @@
 
 #include "Creep.hpp"
 #include "JSON.hpp"
+#include "RoomPosition.hpp"
 #include "StructureController.hpp"
 #include "StructureStorage.hpp"
 
@@ -79,6 +80,22 @@ Room::find(int type, std::function<bool(const JS::Value&)> predicate) const
 int Room::findExitTo(const std::string& room)
 {
 	return value().call<int>("findExitTo", room);
+}
+
+std::vector<PathStep>
+Room::findPath(const RoomPosition& fromPos, const RoomPosition& toPos, const JSON& options)
+{
+	JS::Value path =
+	    value().call<JS::Value>("findPath", fromPos.value(), toPos.value(), JS::fromJSON(options));
+	std::vector<PathStep> pathSteps;
+	std::vector<JS::Value> steps = JS::jsArrayToVector(path);
+
+	for (const auto& step : steps)
+	{
+		pathSteps.emplace_back(PathStep(step));
+	}
+
+	return pathSteps;
 }
 
 } // namespace Screeps

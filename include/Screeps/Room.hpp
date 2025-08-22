@@ -1,6 +1,7 @@
 #ifndef SCREEPS_ROOM_HPP
 #define SCREEPS_ROOM_HPP
 
+#include "../nlohmann/json.hpp"
 #include "Constants.hpp"
 #include "Object.hpp"
 
@@ -10,6 +11,24 @@ class RoomObject;
 class RoomPosition;
 class StructureController;
 class StructureStorage;
+
+
+class PathStep
+{
+public:
+	int x;
+	int y;
+	int dx;
+	int dy;
+
+	PathStep(int x, int y, int dx, int dy) : x(x), y(y), dx(dx), dy(dy) {}
+	PathStep(const JS::Value& value)
+	    : x(value["x"].as<int>()),
+	      y(value["y"].as<int>()),
+	      dx(value["dx"].as<int>()),
+	      dy(value["dy"].as<int>()){}
+};
+
 
 class Room : public Object
 {
@@ -76,7 +95,9 @@ public:
 	int findExitTo(const std::string& room);
 	int findExitTo(const Room& room);
 
-	// ... findPath(const RoomPosition& fromPos, const RoomPosition& toPos, JSON options);
+	std::vector<PathStep>
+	findPath(const RoomPosition& fromPos, const RoomPosition& toPos, const JSON& options = {});
+
 
 	// ... getEventLog(bool raw);
 
