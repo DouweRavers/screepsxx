@@ -6,29 +6,12 @@
 #include "Object.hpp"
 
 namespace Screeps {
-
-class RoomObject;
-class RoomPosition;
-class StructureController;
-class StructureStorage;
-
-
-class PathStep
-{
-public:
-	int x;
-	int y;
-	int dx;
-	int dy;
-
-	PathStep(int x, int y, int dx, int dy) : x(x), y(y), dx(dx), dy(dy) {}
-	PathStep(const JS::Value& value)
-	    : x(value["x"].as<int>()),
-	      y(value["y"].as<int>()),
-	      dx(value["dx"].as<int>()),
-	      dy(value["dy"].as<int>()){}
-};
-
+	struct PathStep;
+	
+	class RoomObject;
+	class RoomPosition;
+	class StructureController;
+	class StructureStorage;
 
 class Room : public Object
 {

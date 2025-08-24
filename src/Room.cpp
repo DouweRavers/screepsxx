@@ -2,6 +2,7 @@
 
 #include "Creep.hpp"
 #include "JSON.hpp"
+#include "ReturnTypes.hpp"
 #include "RoomPosition.hpp"
 #include "StructureController.hpp"
 #include "StructureStorage.hpp"
@@ -92,7 +93,9 @@ Room::findPath(const RoomPosition& fromPos, const RoomPosition& toPos, const JSO
 
 	for (const auto& step : steps)
 	{
-		pathSteps.emplace_back(PathStep(step));
+		pathSteps.emplace_back(PathStep(step["x"].as<int>(), step["y"].as<int>(),
+		                                step["dx"].as<int>(), step["dy"].as<int>(),
+									step["direction"].as<int>()));
 	}
 
 	return pathSteps;
