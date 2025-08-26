@@ -6,16 +6,23 @@
 #include "Object.hpp"
 
 namespace Screeps {
-	struct PathStep;
-	
-	class RoomObject;
-	class RoomPosition;
-	class StructureController;
-	class StructureStorage;
+class RoomObject;
+class RoomPosition;
+class StructureController;
+class StructureStorage;
 
 class Room : public Object
 {
 public:
+	struct PathStep
+	{
+		int x;
+		int y;
+		int dx;
+		int dy;
+		int direction;
+	};
+
 	explicit Room(JS::Value value);
 
 	std::optional<StructureController> controller() const;

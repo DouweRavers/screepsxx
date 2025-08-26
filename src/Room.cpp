@@ -2,7 +2,6 @@
 
 #include "Creep.hpp"
 #include "JSON.hpp"
-#include "ReturnTypes.hpp"
 #include "RoomPosition.hpp"
 #include "StructureController.hpp"
 #include "StructureStorage.hpp"
@@ -83,22 +82,26 @@ int Room::findExitTo(const std::string& room)
 	return value().call<int>("findExitTo", room);
 }
 
-std::vector<PathStep>
+std::vector<Room::PathStep>
 Room::findPath(const RoomPosition& fromPos, const RoomPosition& toPos, const JSON& options)
 {
-	JS::Value path =
-	    value().call<JS::Value>("findPath", fromPos.value(), toPos.value(), JS::fromJSON(options));
-	std::vector<PathStep> pathSteps;
-	std::vector<JS::Value> steps = JS::jsArrayToVector(path);
+	std::vector<PathStep> path;
 
-	for (const auto& step : steps)
+	std::vector<JS::Value> objects =
+	    JS::jsArrayToVector(value().call<JS::Value>("findPath", fromPos.value(), toPos.value(), JS::fromJSON(options)));
+
+	for (const auto& stepObject : objects)
 	{
-		pathSteps.emplace_back(PathStep(step["x"].as<int>(), step["y"].as<int>(),
-		                                step["dx"].as<int>(), step["dy"].as<int>(),
-									step["direction"].as<int>()));
+		PathStep step;
+		step.x = stepObject["x"].as<int>();
+		step.y = stepObject["y"].as<int>();
+		step.dx = stepObject["dx"].as<int>();
+		step.dy = stepObject["dy"].as<int>();
+		step.direction = stepObject["direction"].as<int>();
+		path.emplace_back(step);
 	}
 
-	return pathSteps;
+	return path;
 }
 
 } // namespace Screeps
