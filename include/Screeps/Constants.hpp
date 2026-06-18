@@ -1,3 +1,14 @@
+/**
+ * @file Constants.hpp
+ * @brief Game constants for Screeps API wrapper.
+ * 
+ * This file contains all the game constants used in the Screeps API.
+ * These include result codes, find constants, direction constants, color constants,
+ * body part types and costs, creep statistics, structure statistics, and many more.
+ * 
+ * @see https://docs.screeps.com/api/
+ * @see https://docs.screeps.com/constants.html
+ */
 #ifndef SCREEPS_CONSTANTS_HPP
 #define SCREEPS_CONSTANTS_HPP
 
@@ -7,129 +18,250 @@
 
 namespace Screeps {
 
-const int OK = 0;
-const int ERR_NOT_OWNER = -1;
-const int ERR_NO_PATH = -2;
-const int ERR_NAME_EXISTS = -3;
-const int ERR_BUSY = -4;
-const int ERR_NOT_FOUND = -5;
-const int ERR_NOT_ENOUGH_ENERGY = -6;
-const int ERR_NOT_ENOUGH_RESOURCES = -6;
-const int ERR_INVALID_TARGET = -7;
-const int ERR_FULL = -8;
-const int ERR_NOT_IN_RANGE = -9;
-const int ERR_INVALID_ARGS = -10;
-const int ERR_TIRED = -11;
-const int ERR_NO_BODYPART = -12;
-const int ERR_NOT_ENOUGH_EXTENSIONS = -6;
-const int ERR_RCL_NOT_ENOUGH = -14;
-const int ERR_GCL_NOT_ENOUGH = -15;
+// ============================================================================
+// Result Codes
+// ============================================================================
 
-const int FIND_EXIT_TOP = 1;
-const int FIND_EXIT_RIGHT = 3;
-const int FIND_EXIT_BOTTOM = 5;
-const int FIND_EXIT_LEFT = 7;
-const int FIND_EXIT = 10;
-const int FIND_CREEPS = 101;
-const int FIND_MY_CREEPS = 102;
-const int FIND_HOSTILE_CREEPS = 103;
-const int FIND_SOURCES_ACTIVE = 104;
-const int FIND_SOURCES = 105;
-const int FIND_DROPPED_RESOURCES = 106;
-const int FIND_STRUCTURES = 107;
-const int FIND_MY_STRUCTURES = 108;
-const int FIND_HOSTILE_STRUCTURES = 109;
-const int FIND_FLAGS = 110;
-const int FIND_CONSTRUCTION_SITES = 111;
-const int FIND_MY_SPAWNS = 112;
-const int FIND_HOSTILE_SPAWNS = 113;
-const int FIND_MY_CONSTRUCTION_SITES = 114;
-const int FIND_HOSTILE_CONSTRUCTION_SITES = 115;
-const int FIND_MINERALS = 116;
-const int FIND_NUKES = 117;
-const int FIND_TOMBSTONES = 118;
-const int FIND_POWER_CREEPS = 119;
-const int FIND_MY_POWER_CREEPS = 120;
-const int FIND_HOSTILE_POWER_CREEPS = 121;
-const int FIND_DEPOSITS = 122;
-const int FIND_RUINS = 123;
+/**
+ * @name ResultCodes
+ * @brief Result codes returned by game API methods.
+ * @see https://docs.screeps.com/api/#Result-Constants
+ */
+///@{
+const int OK = 0;                              /**< Operation successful */
+const int ERR_NOT_OWNER = -1;                 /**< You are not the owner of this object */
+const int ERR_NO_PATH = -2;                   /**< No path found to the target */
+const int ERR_NAME_EXISTS = -3;               /**< Name already exists */
+const int ERR_BUSY = -4;                      /**< The object is busy */
+const int ERR_NOT_FOUND = -5;                 /**< Target not found */
+const int ERR_NOT_ENOUGH_ENERGY = -6;         /**< Not enough energy */
+const int ERR_NOT_ENOUGH_RESOURCES = -6;      /**< Not enough resources */
+const int ERR_INVALID_TARGET = -7;           /**< Invalid target */
+const int ERR_FULL = -8;                      /**< Target is full */
+const int ERR_NOT_IN_RANGE = -9;              /**< Target is out of range */
+const int ERR_INVALID_ARGS = -10;             /**< Invalid arguments */
+const int ERR_TIRED = -11;                    /**< Creep is fatigued */
+const int ERR_NO_BODYPART = -12;               /**< Creep lacks the required body part */
+const int ERR_NOT_ENOUGH_EXTENSIONS = -6;     /**< Not enough extensions */
+const int ERR_RCL_NOT_ENOUGH = -14;           /**< Room Controller Level not high enough */
+const int ERR_GCL_NOT_ENOUGH = -15;           /**< Global Control Level not high enough */
+///@}
 
-const int TOP = 1;
-const int TOP_RIGHT = 2;
-const int RIGHT = 3;
-const int BOTTOM_RIGHT = 4;
-const int BOTTOM = 5;
-const int BOTTOM_LEFT = 6;
-const int LEFT = 7;
-const int TOP_LEFT = 8;
+// ============================================================================
+// Find Constants
+// ============================================================================
 
-const int COLOR_RED = 1;
-const int COLOR_PURPLE = 2;
-const int COLOR_BLUE = 3;
-const int COLOR_CYAN = 4;
-const int COLOR_GREEN = 5;
-const int COLOR_YELLOW = 6;
-const int COLOR_ORANGE = 7;
-const int COLOR_BROWN = 8;
-const int COLOR_GREY = 9;
-const int COLOR_WHITE = 10;
+/**
+ * @name FindConstants
+ * @brief Constants used with Room.find() method.
+ * @see https://docs.screeps.com/api/#Room.find
+ */
+///@{
+const int FIND_EXIT_TOP = 1;                  /**< Find exit to top room */
+const int FIND_EXIT_RIGHT = 3;               /**< Find exit to right room */
+const int FIND_EXIT_BOTTOM = 5;               /**< Find exit to bottom room */
+const int FIND_EXIT_LEFT = 7;                 /**< Find exit to left room */
+const int FIND_EXIT = 10;                     /**< Find all exits */
+const int FIND_CREEPS = 101;                  /**< Find all creeps */
+const int FIND_MY_CREEPS = 102;               /**< Find my creeps */
+const int FIND_HOSTILE_CREEPS = 103;          /**< Find hostile creeps */
+const int FIND_SOURCES_ACTIVE = 104;          /**< Find active sources */
+const int FIND_SOURCES = 105;                 /**< Find all sources */
+const int FIND_DROPPED_RESOURCES = 106;      /**< Find dropped resources */
+const int FIND_STRUCTURES = 107;              /**< Find all structures */
+const int FIND_MY_STRUCTURES = 108;          /**< Find my structures */
+const int FIND_HOSTILE_STRUCTURES = 109;     /**< Find hostile structures */
+const int FIND_FLAGS = 110;                   /**< Find all flags */
+const int FIND_CONSTRUCTION_SITES = 111;     /**< Find all construction sites */
+const int FIND_MY_SPAWNS = 112;               /**< Find my spawns */
+const int FIND_HOSTILE_SPAWNS = 113;          /**< Find hostile spawns */
+const int FIND_MY_CONSTRUCTION_SITES = 114;  /**< Find my construction sites */
+const int FIND_HOSTILE_CONSTRUCTION_SITES = 115; /**< Find hostile construction sites */
+const int FIND_MINERALS = 116;                /**< Find all minerals */
+const int FIND_NUKES = 117;                   /**< Find all nukes */
+const int FIND_TOMBSTONES = 118;              /**< Find all tombstones */
+const int FIND_POWER_CREEPS = 119;            /**< Find all power creeps */
+const int FIND_MY_POWER_CREEPS = 120;         /**< Find my power creeps */
+const int FIND_HOSTILE_POWER_CREEPS = 121;    /**< Find hostile power creeps */
+const int FIND_DEPOSITS = 122;                /**< Find all deposits */
+const int FIND_RUINS = 123;                   /**< Find all ruins */
+///@}
 
-const auto LOOK_CREEPS = "creep";
-const auto LOOK_ENERGY = "energy";
-const auto LOOK_RESOURCES = "resource";
-const auto LOOK_SOURCES = "source";
-const auto LOOK_MINERALS = "mineral";
-const auto LOOK_DEPOSITS = "deposit";
-const auto LOOK_STRUCTURES = "structure";
-const auto LOOK_FLAGS = "flag";
-const auto LOOK_CONSTRUCTION_SITES = "constructionSite";
-const auto LOOK_NUKES = "nuke";
-const auto LOOK_TERRAIN = "terrain";
-const auto LOOK_TOMBSTONES = "tombstone";
-const auto LOOK_POWER_CREEPS = "powerCreep";
-const auto LOOK_RUINS = "ruin";
+// ============================================================================
+// Direction Constants
+// ============================================================================
 
+/**
+ * @name DirectionConstants
+ * @brief Direction constants for movement and positioning.
+ * @see https://docs.screeps.com/api/#Direction-Constants
+ */
+///@{
+const int TOP = 1;             /**< Top direction */
+const int TOP_RIGHT = 2;      /**< Top-right direction */
+const int RIGHT = 3;          /**< Right direction */
+const int BOTTOM_RIGHT = 4;   /**< Bottom-right direction */
+const int BOTTOM = 5;         /**< Bottom direction */
+const int BOTTOM_LEFT = 6;    /**< Bottom-left direction */
+const int LEFT = 7;           /**< Left direction */
+const int TOP_LEFT = 8;       /**< Top-left direction */
+///@}
+
+// ============================================================================
+// Color Constants
+// ============================================================================
+
+/**
+ * @name ColorConstants
+ * @brief Color constants used for flags and other visual elements.
+ * @see https://docs.screeps.com/api/#Color-Constants
+ */
+///@{
+const int COLOR_RED = 1;      /**< Red color */
+const int COLOR_PURPLE = 2;    /**< Purple color */
+const int COLOR_BLUE = 3;     /**< Blue color */
+const int COLOR_CYAN = 4;     /**< Cyan color */
+const int COLOR_GREEN = 5;    /**< Green color */
+const int COLOR_YELLOW = 6;   /**< Yellow color */
+const int COLOR_ORANGE = 7;   /**< Orange color */
+const int COLOR_BROWN = 8;    /**< Brown color */
+const int COLOR_GREY = 9;     /**< Grey color */
+const int COLOR_WHITE = 10;   /**< White color */
+///@}
+
+// ============================================================================
+// Look Constants
+// ============================================================================
+
+/**
+ * @name LookConstants
+ * @brief Constants used with Room.lookAt() and Room.lookAtArea() methods.
+ * @see https://docs.screeps.com/api/#Room.lookAt
+ */
+///@{
+const auto LOOK_CREEPS = "creep";             /**< Look for creeps */
+const auto LOOK_ENERGY = "energy";             /**< Look for energy */
+const auto LOOK_RESOURCES = "resource";         /**< Look for resources */
+const auto LOOK_SOURCES = "source";            /**< Look for sources */
+const auto LOOK_MINERALS = "mineral";           /**< Look for minerals */
+const auto LOOK_DEPOSITS = "deposit";           /**< Look for deposits */
+const auto LOOK_STRUCTURES = "structure";       /**< Look for structures */
+const auto LOOK_FLAGS = "flag";                /**< Look for flags */
+const auto LOOK_CONSTRUCTION_SITES = "constructionSite"; /**< Look for construction sites */
+const auto LOOK_NUKES = "nuke";                 /**< Look for nukes */
+const auto LOOK_TERRAIN = "terrain";           /**< Look for terrain */
+const auto LOOK_TOMBSTONES = "tombstone";       /**< Look for tombstones */
+const auto LOOK_POWER_CREEPS = "powerCreep";    /**< Look for power creeps */
+const auto LOOK_RUINS = "ruin";                /**< Look for ruins */
+///@}
+
+// ============================================================================
+// Obstacle Types
+// ============================================================================
+
+/**
+ * @name ObstacleTypes
+ * @brief Object types that are considered obstacles for pathfinding.
+ */
 const std::vector<std::string> OBSTACLE_OBJECT_TYPES = {
     "spawn",           "creep",     "powerCreep", "source",  "mineral", "deposit",    "controller",
     "constructedWall", "extension", "link",       "storage", "tower",   "observer",   "powerSpawn",
     "powerBank",       "lab",       "terminal",   "nuker",   "factory", "invaderCore"};
 
-const auto MOVE = "move";
-const auto WORK = "work";
-const auto CARRY = "carry";
-const auto ATTACK = "attack";
-const auto RANGED_ATTACK = "ranged_attack";
-const auto TOUGH = "tough";
-const auto HEAL = "heal";
-const auto CLAIM = "claim";
+// ============================================================================
+// Body Part Constants
+// ============================================================================
 
+/**
+ * @name BodyPartConstants
+ * @brief Creep body part type constants.
+ * @see https://docs.screeps.com/api/#Creep
+ */
+///@{
+const auto MOVE = "move";            /**< Move body part - enables movement */
+const auto WORK = "work";            /**< Work body part - enables harvesting, building, repairing */
+const auto CARRY = "carry";          /**< Carry body part - enables carrying resources */
+const auto ATTACK = "attack";        /**< Attack body part - enables melee attacks */
+const auto RANGED_ATTACK = "ranged_attack"; /**< Ranged attack body part - enables ranged attacks */
+const auto TOUGH = "tough";           /**< Tough body part - reduces damage taken */
+const auto HEAL = "heal";            /**< Heal body part - enables healing */
+const auto CLAIM = "claim";          /**< Claim body part - enables claiming controllers */
+///@}
+
+// ============================================================================
+// Body Part Costs
+// ============================================================================
+
+/**
+ * @name BodyPartCosts
+ * @brief Energy cost for each body part type.
+ * @see https://docs.screeps.com/api/#Creep
+ */
 const std::map<std::string, int> BODYPART_COST = {
-    {"move", 50},  {"work", 100},          {"attack", 80}, {"carry", 50},
-    {"heal", 250}, {"ranged_attack", 150}, {"tough", 10},  {"claim", 600}};
+    {"move", 50},       /**< Cost of MOVE body part */
+    {"work", 100},      /**< Cost of WORK body part */
+    {"attack", 80},     /**< Cost of ATTACK body part */
+    {"carry", 50},      /**< Cost of CARRY body part */
+    {"heal", 250},      /**< Cost of HEAL body part */
+    {"ranged_attack", 150}, /**< Cost of RANGED_ATTACK body part */
+    {"tough", 10},      /**< Cost of TOUGH body part */
+    {"claim", 600}};     /**< Cost of CLAIM body part */
 
+// ============================================================================
+// World Constants
+// ============================================================================
+
+/**
+ * @name WorldConstants
+ * @brief World-related constants.
+ */
+///@{
 // WORLD_WIDTH and WORLD_HEIGHT constants are deprecated, please use Game.map.getWorldSize() instead
-const auto WORLD_WIDTH = 202;
-const auto WORLD_HEIGHT = 202;
+const auto WORLD_WIDTH = 202;                 /**< World width (deprecated) */
+const auto WORLD_HEIGHT = 202;                /**< World height (deprecated) */
+///@}
 
-const auto CREEP_LIFE_TIME = 1500;
-const auto CREEP_CLAIM_LIFE_TIME = 600;
-const auto CREEP_CORPSE_RATE = 0.2;
-const auto CREEP_PART_MAX_ENERGY = 125;
+// ============================================================================
+// Creep Constants
+// ============================================================================
 
-const auto CARRY_CAPACITY = 50;
-const auto HARVEST_POWER = 2;
-const auto HARVEST_MINERAL_POWER = 1;
-const auto HARVEST_DEPOSIT_POWER = 1;
-const auto REPAIR_POWER = 100;
-const auto DISMANTLE_POWER = 50;
-const auto BUILD_POWER = 5;
-const auto ATTACK_POWER = 30;
-const auto UPGRADE_CONTROLLER_POWER = 1;
-const auto RANGED_ATTACK_POWER = 10;
-const auto HEAL_POWER = 12;
-const auto RANGED_HEAL_POWER = 4;
-const auto REPAIR_COST = 0.01;
-const auto DISMANTLE_COST = 0.005;
+/**
+ * @name CreepConstants
+ * @brief Creep-related constants.
+ * @see https://docs.screeps.com/api/#Creep
+ */
+///@{
+const auto CREEP_LIFE_TIME = 1500;            /**< Default creep lifetime in ticks */
+const auto CREEP_CLAIM_LIFE_TIME = 600;        /**< Claim creep lifetime in ticks */
+const auto CREEP_CORPSE_RATE = 0.2;            /**< Chance that a dead creep leaves a corpse */
+const auto CREEP_PART_MAX_ENERGY = 125;        /**< Maximum energy per body part */
+///@}
+
+// ============================================================================
+// Creep Action Powers
+// ============================================================================
+
+/**
+ * @name CreepActionPowers
+ * @brief Power/effectiveness of creep actions per body part per tick.
+ * @see https://docs.screeps.com/api/#Creep
+ */
+///@{
+const auto CARRY_CAPACITY = 50;              /**< Carry capacity per CARRY body part */
+const auto HARVEST_POWER = 2;                 /**< Harvest power per WORK body part on sources */
+const auto HARVEST_MINERAL_POWER = 1;         /**< Harvest power per WORK body part on minerals */
+const auto HARVEST_DEPOSIT_POWER = 1;         /**< Harvest power per WORK body part on deposits */
+const auto REPAIR_POWER = 100;                /**< Repair power per WORK body part */
+const auto DISMANTLE_POWER = 50;               /**< Dismantle power per WORK body part */
+const auto BUILD_POWER = 5;                   /**< Build power per WORK body part */
+const auto ATTACK_POWER = 30;                 /**< Attack power per ATTACK body part */
+const auto UPGRADE_CONTROLLER_POWER = 1;      /**< Upgrade controller power per WORK body part */
+const auto RANGED_ATTACK_POWER = 10;          /**< Ranged attack power per RANGED_ATTACK body part */
+const auto HEAL_POWER = 12;                   /**< Heal power per HEAL body part */
+const auto RANGED_HEAL_POWER = 4;             /**< Ranged heal power per HEAL body part */
+const auto REPAIR_COST = 0.01;                /**< Energy cost per hit point when repairing */
+const auto DISMANTLE_COST = 0.005;             /**< Energy return per hit point when dismantling */
+///@}
 
 const auto RAMPART_DECAY_AMOUNT = 300;
 const auto RAMPART_DECAY_TIME = 100;

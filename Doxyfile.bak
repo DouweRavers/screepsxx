@@ -1,0 +1,6 @@
+INPUT                  = ./include ./src  # Paths to your headers/sources
+OUTPUT_DIRECTORY       = ./docs
+GENERATE_HTML          = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES  # Include private members
+HIDE_UNDOC_MEMBERS     = NO
