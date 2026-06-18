@@ -5,6 +5,9 @@
 #include "Deposit.hpp"
 #include "Effect.hpp"
 #include "Flag.hpp"
+#include "Mineral.hpp"
+#include "Nuke.hpp"
+#include "PowerCreep.hpp"
 #include "Resource.hpp"
 #include "Room.hpp"
 #include "RoomPosition.hpp"
@@ -14,7 +17,15 @@
 #include "StructureController.hpp"
 #include "StructureExtension.hpp"
 #include "StructureExtractor.hpp"
+#include "StructureFactory.hpp"
+#include "StructureInvaderCore.hpp"
+#include "StructureKeeperLair.hpp"
 #include "StructureLink.hpp"
+#include "StructureNuker.hpp"
+#include "StructureObserver.hpp"
+#include "StructurePowerBank.hpp"
+#include "StructurePowerSpawn.hpp"
+#include "StructurePortal.hpp"
 #include "StructureRampart.hpp"
 #include "StructureRoad.hpp"
 #include "StructureSpawn.hpp"
@@ -22,6 +33,7 @@
 #include "StructureTerminal.hpp"
 #include "StructureTower.hpp"
 #include "StructureWall.hpp"
+#include "Tombstone.hpp"
 
 namespace Screeps {
 
@@ -91,6 +103,22 @@ std::unique_ptr<RoomObject> createRoomObject(JS::Value object)
 			return std::make_unique<StructureExtractor>(std::move(object));
 		else if (type == Screeps::STRUCTURE_TERMINAL)
 			return std::make_unique<StructureTerminal>(std::move(object));
+		else if (type == Screeps::STRUCTURE_FACTORY)
+			return std::make_unique<StructureFactory>(std::move(object));
+		else if (type == Screeps::STRUCTURE_INVADER_CORE)
+			return std::make_unique<StructureInvaderCore>(std::move(object));
+		else if (type == Screeps::STRUCTURE_KEEPER_LAIR)
+			return std::make_unique<StructureKeeperLair>(std::move(object));
+		else if (type == Screeps::STRUCTURE_NUKER)
+			return std::make_unique<StructureNuker>(std::move(object));
+		else if (type == Screeps::STRUCTURE_OBSERVER)
+			return std::make_unique<StructureObserver>(std::move(object));
+		else if (type == Screeps::STRUCTURE_POWER_BANK)
+			return std::make_unique<StructurePowerBank>(std::move(object));
+		else if (type == Screeps::STRUCTURE_POWER_SPAWN)
+			return std::make_unique<StructurePowerSpawn>(std::move(object));
+		else if (type == Screeps::STRUCTURE_PORTAL)
+			return std::make_unique<StructurePortal>(std::move(object));
 		else
 			return nullptr;
 	}
@@ -108,6 +136,14 @@ std::unique_ptr<RoomObject> createRoomObject(JS::Value object)
 		return std::make_unique<Flag>(std::move(object));
 	else if (is("Resource"))
 		return std::make_unique<Resource>(std::move(object));
+	else if (is("Mineral"))
+		return std::make_unique<Mineral>(std::move(object));
+	else if (is("Nuke"))
+		return std::make_unique<Nuke>(std::move(object));
+	else if (is("Tombstone"))
+		return std::make_unique<Tombstone>(std::move(object));
+	else if (is("PowerCreep"))
+		return std::make_unique<PowerCreep>(std::move(object));
 	else
 		return nullptr;
 }

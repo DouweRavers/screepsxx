@@ -1,0 +1,3 @@
+/mnt/douwe/hdd/Projects/Screeps/screepsxx/build/CMakeFiles/screepsxx.dir
+/mnt/douwe/hdd/Projects/Screeps/screepsxx/build/CMakeFiles/edit_cache.dir
+/mnt/douwe/hdd/Projects/Screeps/screepsxx/build/CMakeFiles/rebuild_cache.dir

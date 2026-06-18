@@ -79,7 +79,7 @@ public:
 	int move(const Creep& direction);
 	int move(int direction);
 
-	// int moveByPath(...);
+	int moveByPath(const std::string& path);
 
 	int moveTo(int x, int y, const std::optional<JSON>& options = std::nullopt);
 	int moveTo(const RoomPosition& target, const std::optional<JSON>& options = std::nullopt);

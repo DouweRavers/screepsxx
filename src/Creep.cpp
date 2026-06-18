@@ -163,6 +163,11 @@ int Creep::move(int direction)
 	return value().call<int>("move", direction);
 }
 
+int Creep::moveByPath(const std::string& path)
+{
+	return value().call<int>("moveByPath", path);
+}
+
 int Creep::moveTo(int x, int y, const std::optional<JSON>& options)
 {
 	if (options)
