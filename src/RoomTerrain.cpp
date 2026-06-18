@@ -5,8 +5,8 @@ namespace Screeps {
 
 RoomTerrain::RoomTerrain(JS::Value value) : Object(std::move(value)) {}
 
-std::string RoomTerrain::get(int x, int y) const {
-    return value().call<std::string>("get", x, y);
+int RoomTerrain::get(int x, int y) const {
+    return value().call<int>("get", x, y);
 }
 
 } // namespace Screeps
