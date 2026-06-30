@@ -115,7 +115,22 @@ public:
 	 * @return std::optional<JS::Value> The closest object as JS::Value, or nullopt if none found.
 	 */
 	std::optional<JS::Value> findClosestByPath(const std::vector<JS::Value>& objects);
-	
+
+	/**
+	 * @brief Find the closest object by straight-line (Euclidean) distance.
+	 * 
+	 * This is faster than findClosestByPath as it doesn't perform pathfinding,
+	 * but only considers direct distance, not actual walkable paths.
+	 * 
+	 * @param type const value of type to search for.
+	 * @param options Optional JSON object with filtering options.
+	 * @return std::unique_ptr<RoomObject> The closest RoomObject, or nullptr if none found.
+	 * 
+	 * @see findClosestByPath, findInRange
+	 */
+	std::unique_ptr<RoomObject>
+	findClosestByRange(const int type, const JSON& options = {});
+
 	/**
 	 * @brief Find the closest object by straight-line (Euclidean) distance.
 	 * 
@@ -139,7 +154,7 @@ public:
 	 * @return std::optional<JS::Value> The closest object as JS::Value, or nullopt if none found.
 	 */
 	std::optional<JS::Value> findClosestByRange(const std::vector<JS::Value>& objects, const JSON& options = {});
-	
+
 	/**
 	 * @brief Find all objects within a specified range.
 	 * 

@@ -73,6 +73,18 @@ std::optional<JS::Value> RoomPosition::findClosestByPath(const std::vector<JS::V
 }
 
 std::unique_ptr<RoomObject>
+RoomPosition::findClosestByRange(const int type, const JSON& options)
+{
+	JS::Value jsOptions = options.empty() ? JS::Value::undefined() : JS::fromJSON(options);
+	auto object = value().call<JS::Value>("findClosestByRange", type, jsOptions);
+
+	if (object.isUndefined())
+		return nullptr;
+	else
+		return createRoomObject(object);
+}
+
+std::unique_ptr<RoomObject>
 RoomPosition::findClosestByRange(const std::vector<std::unique_ptr<RoomObject>>& objects, const JSON& options)
 {
 	std::vector<JS::Value> values;
