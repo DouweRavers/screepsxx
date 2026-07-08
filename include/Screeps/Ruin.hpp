@@ -7,6 +7,7 @@
 #define SCREEPS_RUIN_HPP
 
 #include "RoomObject.hpp"
+#include "Store.hpp"
 
 namespace Screeps {
 
@@ -28,6 +29,17 @@ public:
 	 * @param value The JavaScript value representing the ruin.
 	 */
 	explicit Ruin(JS::Value value);
+
+	std::string id() const;
+
+	/**
+	 * @brief Get the store of this ruin.
+	 * @return The Store object containing resources in this ruin.
+	 * @see https://docs.screeps.com/api/#Ruin.store
+	 */
+	Store store() const;
+
+	int ticksToDecay() const;
 };
 
 } // namespace Screeps

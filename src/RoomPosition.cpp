@@ -111,6 +111,19 @@ std::optional<JS::Value> RoomPosition::findClosestByRange(const std::vector<JS::
 }
 
 std::vector<std::unique_ptr<RoomObject>>
+RoomPosition::findInRange(const int type, int range, const JSON& options)
+{
+	JS::Value jsOptions = options.empty() ? JS::Value::undefined() : JS::fromJSON(options);
+	auto result = JS::jsArrayToVector(value().call<JS::Value>("findInRange", type, range, jsOptions));
+	std::vector<std::unique_ptr<RoomObject>> roomObjects;
+	roomObjects.reserve(result.size());
+	for (const auto& obj : result)
+		if (auto roomObj = createRoomObject(obj))
+			roomObjects.push_back(std::move(roomObj));
+	return roomObjects;
+}
+
+std::vector<std::unique_ptr<RoomObject>>
 RoomPosition::findInRange(const std::vector<std::unique_ptr<RoomObject>>& objects, int range, const JSON& options)
 {
 	std::vector<JS::Value> values;

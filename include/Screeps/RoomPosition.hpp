@@ -161,6 +161,22 @@ public:
 	 * Returns all objects from the given list that are within the specified
 	 * straight-line distance from this position.
 	 * 
+	 * @param type const value of type to search for.
+	 * @param range The maximum distance (in squares) to search.
+	 * @param options Optional JSON object with filtering options.
+	 * @return std::vector<std::unique_ptr<RoomObject>> Vector of RoomObjects within range.
+	 * 
+	 * @see findClosestByPath, findClosestByRange
+	 */
+	std::vector<std::unique_ptr<RoomObject>>
+	findInRange(const int type, int range, const JSON& options = {});
+
+	/**
+	 * @brief Find all objects within a specified range.
+	 * 
+	 * Returns all objects from the given list that are within the specified
+	 * straight-line distance from this position.
+	 * 
 	 * @param objects Vector of RoomObject pointers to search through.
 	 * @param range The maximum distance (in squares) to search.
 	 * @param options Optional JSON object with filtering options.
